@@ -6,10 +6,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -58,7 +58,9 @@ public class ExcavateHelper {
     }
 
     static boolean isValidPos(BlockPos pos) {
-        return (Math.abs(pos.getX()) + Math.abs(pos.getY()) + Math.abs(pos.getZ())) != 0;
+        // This is weird. What's the original code for?
+        return true;
+        //return (Math.abs(pos.getX()) + Math.abs(pos.getY()) + Math.abs(pos.getZ())) != 0;
     }
 
     static Block getBlockAt(World world, BlockPos pos) {
@@ -89,6 +91,6 @@ public class ExcavateHelper {
     }
 
     private static boolean isTool(Item isTool) {
-        return isTool.isDamageable() || DiggusMaximusMod.getOptions().tools.contains(Registries.ITEM.getId(isTool).toString());
+        return isTool.isDamageable() || DiggusMaximusMod.getOptions().tools.contains(Registry.ITEM.getId(isTool).toString());
     }
 }

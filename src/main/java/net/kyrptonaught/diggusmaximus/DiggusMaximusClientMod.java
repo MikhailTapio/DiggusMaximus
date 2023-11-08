@@ -17,16 +17,17 @@ public class DiggusMaximusClientMod implements ClientModInitializer {
     public void onInitializeClient() {
         ClientTickEvents.END_WORLD_TICK.register(clientWorld -> {
             if (DiggusMaximusMod.getExcavatingShapes().enableShapes && getCycleKey().wasPressed()) {
-                int currentSelectiong = DiggusMaximusMod.getExcavatingShapes().selectedShape.ordinal();
+                int currentSelecting = DiggusMaximusMod.getExcavatingShapes().selectedShape.ordinal();
+                if (MinecraftClient.getInstance().player == null) return;
                 if (MinecraftClient.getInstance().player.isSneaking())
-                    currentSelectiong--;
-                else currentSelectiong++;
-                if (currentSelectiong >= ExcavateTypes.shape.values().length)
-                    currentSelectiong = 0;
-                else if (currentSelectiong < 0)
-                    currentSelectiong = ExcavateTypes.shape.values().length - 1;
-                DiggusMaximusMod.getExcavatingShapes().selectedShape = ExcavateTypes.shape.values()[currentSelectiong];
-                MinecraftClient.getInstance().player.sendMessage(Text.translatable("diggusmaximus.shape." + ExcavateTypes.shape.values()[currentSelectiong]), true);
+                    currentSelecting--;
+                else currentSelecting++;
+                if (currentSelecting >= ExcavateTypes.shape.values().length)
+                    currentSelecting = 0;
+                else if (currentSelecting < 0)
+                    currentSelecting = ExcavateTypes.shape.values().length - 1;
+                DiggusMaximusMod.getExcavatingShapes().selectedShape = ExcavateTypes.shape.values()[currentSelecting];
+                MinecraftClient.getInstance().player.sendMessage(Text.translatable("diggusmaximus.shape." + ExcavateTypes.shape.values()[currentSelecting]), true);
                 DiggusMaximusMod.configManager.save();
             }
         });

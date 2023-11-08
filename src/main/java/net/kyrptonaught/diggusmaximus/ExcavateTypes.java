@@ -17,23 +17,15 @@ public class ExcavateTypes {
         if (shapeSelection == -1)
             return DiggusMaximusMod.getOptions().mineDiag ? ExcavateTypes.standardDiag : ExcavateTypes.standard;
 
-        switch (shape.values()[shapeSelection]) {
-            case HOLE:
-                return ExcavateTypes.hole(facing);
-            case HORIZONTAL_LAYER:
-                return ExcavateTypes.horizontalLayer();
-            case LAYER:
-                return ExcavateTypes.layers(facing);
-            case ONExTWO:
-                return ExcavateTypes.onebytwo(startPos, curPos);
-            case ONExTWO_TUNNEL:
-                return ExcavateTypes.onebytwoTunnel(startPos, curPos, facing);
-            case THREExTHREE:
-                return ExcavateTypes.threebythree(startPos, curPos, facing);
-            case THREExTHREE_TUNNEL:
-                return ExcavateTypes.threebythreeTunnel(startPos, curPos, facing);
-        }
-        return ExcavateTypes.standard;
+        return switch (shape.values()[shapeSelection]) {
+            case HOLE -> ExcavateTypes.hole(facing);
+            case HORIZONTAL_LAYER -> ExcavateTypes.horizontalLayer();
+            case LAYER -> ExcavateTypes.layers(facing);
+            case ONExTWO -> ExcavateTypes.onebytwo(startPos, curPos);
+            case ONExTWO_TUNNEL -> ExcavateTypes.onebytwoTunnel(startPos, curPos, facing);
+            case THREExTHREE -> ExcavateTypes.threebythree(startPos, curPos, facing);
+            case THREExTHREE_TUNNEL -> ExcavateTypes.threebythreeTunnel(startPos, curPos, facing);
+        };
     }
 
     public static List<BlockPos> horizontalLayer() {
